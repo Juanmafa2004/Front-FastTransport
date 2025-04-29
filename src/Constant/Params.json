@@ -1,0 +1,13 @@
+{
+    "Apis": {
+        "Local": "Api de desarrollo",
+        "Dev": "http://localhost:28081",
+        "Prod": "http://localhost:28081"
+    },
+    "Encripted": {
+        "Local": false,
+        "Dev": false,
+        "Prod": true
+    },
+    "MinutesJWT": "60"
+}
