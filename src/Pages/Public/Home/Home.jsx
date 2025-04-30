@@ -1,16 +1,9 @@
-import React from "react";
-import styles from "./Home.style.module.css";
-import { LogoTauro } from "@Assets";
+import { Login } from "./Components/Login";
 
 const Home = () => {
   return (
-    <div className={styles.content}>
-      <div>
-        <p>
-          Template de la arquitectura utilizada para la creación de aplicaciones
-        </p>
-        <p>por parte de Tauro Dev</p>
-      </div>
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+      <Login />
     </div>
   );
 };
