@@ -13,9 +13,11 @@ const Master = () => {
   const { reCharceData } = useSaveCredential();
   useEffect(() => {
     reCharceData();
-  }, [])
+  }, []);
   return (
-    <ProviderRoute>
+    <ProviderRoute
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
       <Routes>
         <Route index path="/*" element={<Landing />} />
         <Route element={<PrivateRoute />}>

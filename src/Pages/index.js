@@ -1,2 +1,10 @@
+export * from './index';
+export { default as Homepage } from './Private/Homepage/Homepage';
+export { default as HomepageViewModel } from './Private/Homepage/Homepage.viewmodel';
+export * from './Public/Home/Components/EyeFilledIcon';
+export * from './Public/Home/Components/EyeSlashFilledIcon';
+export * from './Public/Home/Components/Login';
 export { default as Home } from './Public/Home/Home';
-export * from './Public/Home/Home.viewmodel';
+export { default as HomeViewModel } from './Public/Home/Home.viewmodel';
+export { default as Register } from './Public/Register/Register';
+export { default as RegisterViewModel } from './Public/Register/Register.viewmodel';
