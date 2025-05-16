@@ -2,12 +2,15 @@ import { useState } from "react";
 import { validarEmail } from "@Utils";
 import { useNavigate } from "react-router-dom";
 import { useNotifyHandler } from "@Hooks";
-
+import { AdapterLogin } from "@Adapters";
+import { useDispatch } from "react-redux";
+import { setUser } from "@Slice";
 export const HomeViewmodel = () => {
   const [formData, setFormData] = useState({
     user: "",
     password: "",
   });
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const { alertNotify } = useNotifyHandler();
@@ -23,14 +26,14 @@ export const HomeViewmodel = () => {
     }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const { user, password } = formData;
     const newErrors = {};
 
     if (!user) {
       newErrors.user = "el correo es requerido";
     } else if (!validarEmail(user)) {
-      newErrors.user = "el correoo es inválido";
+      newErrors.user = "el correo es inválido";
     }
 
     if (!password) {
@@ -47,8 +50,22 @@ export const HomeViewmodel = () => {
       );
       return;
     }
-
-    navigate("/tablero", { replace: true });
+    try {
+      const response = await AdapterLogin(formData);
+      if (response.status === 200) {
+        alertNotify("Inicio de sesión exitoso", "bottom", "center", "success");
+        await dispatch(setUser(response.data));
+        navigate("/tablero/homepage", { replace: true });
+      }
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+      alertNotify(
+        error.msg || "Error al iniciar sesión",
+        "bottom",
+        "center",
+        "error"
+      );
+    }
   };
 
   return {

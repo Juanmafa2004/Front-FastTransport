@@ -1,8 +1,8 @@
 {
     "Apis": {
         "Local": "Api de desarrollo",
-        "Dev": "http://localhost:28081",
-        "Prod": "http://localhost:28081"
+        "Dev": "http://localhost:3000",
+        "Prod": "http://localhost:3000"
     },
     "Encripted": {
         "Local": false,

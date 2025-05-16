@@ -17,7 +17,7 @@ export default defineConfig({
         __dirname,
         "src/Adapters/Remote/HttpRequest.jsx"
       ),
-      "@Adapters": path.resolve(__dirname, "src/Adapters/index.jsX"),
+      "@Adapters": path.resolve(__dirname, "src/Adapters/index.js"),
       "@Hooks": path.resolve(__dirname, "src/Hooks"),
       "@Middleware": path.resolve(__dirname, "src/Middleware"),
       "@Constant": path.resolve(__dirname, "src/Constant"),

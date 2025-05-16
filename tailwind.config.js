@@ -41,6 +41,9 @@ export default {
         },
         placeHolder: {
           DEFAULT: "#cfc4bc",
+        },
+        sidebar: {
+          default: "#f2f2f4",
         }
       },
     }

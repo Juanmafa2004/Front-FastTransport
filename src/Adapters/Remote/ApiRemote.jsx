@@ -40,12 +40,12 @@ export class AxiosRequest {
     });
   }
 
-    ExecutePetition = async (url, data = null) => {
+   ExecutePetition = async (url, method, data = null) => {
     try {
-      const res = await this.instanceAxios['post'](url, data);
+      const res = await this.instanceAxios[method.toLowerCase()](url, data);
       return res.data;
     } catch (e) {
-      return e.response.data;
+      throw e.response.data;
     }
-  }
+  };
 }

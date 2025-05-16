@@ -1,7 +1,7 @@
 {
-    "Routes": {
-      "auth": {
-        "login": "/auth/example"
-      }
+  "Routes": {
+    "uses": {
+      "login": "/usuarios/login"
     }
   }
+}

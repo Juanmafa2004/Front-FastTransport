@@ -1,19 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { encryptInformation, decryptInformation } from "@Utils";
 
 const initialState = {
-  uuid: "",
-  name: "",
-  lastname: "",
-  email: "",
-  isConfirmed: false,
-  dateJoined: "",
-  gender: "",
-  phoneNumber: 0,
-  password: "",
-  userType: 1,
-  dateOfBirth: "",
-  isActive: false,
-  status: 400,
+  id_rol: 0,
+  rol: "",
+  correo: "",
 };
 
 const userSlice = createSlice({
@@ -21,11 +12,23 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      return action.payload;
+      const newState = action.payload;
+      localStorage.setItem("user", encryptInformation(newState));
+      return newState;
     },
-    clearUser: () => initialState,
+    loadUser: (state) => {
+      const encryptedUser = localStorage.getItem("user");
+      if (encryptedUser) {
+        return  decryptInformation(encryptedUser) ;
+      }
+      return state;
+    },
+    clearUser: () => {
+      localStorage.removeItem("user");
+      return initialState;
+    },
   },
 });
 
-export const { setUser, clearUser } = userSlice.actions;
+export const { setUser, loadUser, clearUser } = userSlice.actions;
 export default userSlice.reducer;

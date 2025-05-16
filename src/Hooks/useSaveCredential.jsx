@@ -8,7 +8,7 @@ const SaveCredentialHook = () => {
   const SaveData = (user) => dispatch(setUser({...dataOld, ...user}));
 
   const reCharceData = () => {
-    const userLocal = JSON.parse(localStorage.getItem("login"));
+    const userLocal = JSON.parse(localStorage.getItem("user"));
     if(userLocal == null) {
       dispatch(clearUser())
     } else {

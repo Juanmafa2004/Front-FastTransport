@@ -1,10 +1,18 @@
 import LogoTauro from './LogoTauro.svg';
 
-export {LogoTauro}
+export { LogoTauro }
 
 import LogoFast from './fastTransportLogo.png';
 
-export {LogoFast}
+export { LogoFast }
 
 import LogoFastBackground from './fastTransportLogoConFondo.png';
-export {LogoFastBackground}
+export { LogoFastBackground }
+
+
+import UserProfile from './UserProfileIcon.svg';
+
+export { UserProfile }
+
+import FastTransportMain from './FastTransportMain.png';
+export { FastTransportMain }
