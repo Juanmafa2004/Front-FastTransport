@@ -5,6 +5,7 @@ const initialState = {
   id_rol: 0,
   rol: "",
   correo: "",
+  id_usuario: 0,
 };
 
 const userSlice = createSlice({

@@ -1,7 +1,19 @@
 {
   "Routes": {
-    "uses": {
+    "users": {
       "login": "/usuarios/login"
+    },
+    "clients":{
+      "getClients":"/clientes/"
+    },
+    "envio":{
+      "getEnvios":"/envio/"
+    },
+    "estadoEnvio":{
+      "getEstadoEnvios":"/estado_envio/"
+    },
+    "rutas":{
+      "getRutas":"/rutas/"
     }
   }
 }

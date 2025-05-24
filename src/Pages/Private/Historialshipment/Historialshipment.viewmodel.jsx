@@ -1,16 +1,19 @@
 import { useState } from "react";
 
 const HistorialshipmentViewModel = () => {
-  const [count, setCount] = useState(0);
+  const [modals, setModals] = useState({
+    modalInfo: false,
+    modalEdit: false,
+    ModolCreate: false,
+  });
 
-  const Increment = () => {
-    setCount(count + 1);
+  const [data,setData] = useState({});
+
+  const toggleModal = (modalName) => {
+    setModals((prev) => ({ ...prev, [modalName]: !prev[modalName] }));
   };
 
-  return {
-    Increment,
-    count,
-  };
+  return { modals, toggleModal,data,setData };
 };
 
 export default HistorialshipmentViewModel;

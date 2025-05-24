@@ -22,25 +22,25 @@ const navigation = [
 
   {
     id: "shipments",
-    label: "Solicitar envio (cliente)",
+    label: "Solicitar envio ", //(cliente)
     icon: <ShipmentIcon />,
     link: "/tablero/sendshipment",
   },
   {
     id: "historialShipments",
-    label: "Historial de envios (cliente)",
+    label: "Historial de envios",
     icon: <HistorialShipmentIcon />,
     link: "/tablero/historialshipment",
   },
   {
     id: "management",
-    label: "Gestión de envios (Administrador)",
+    label: "Gestión de envios ", //(Administrador)
     icon: <ManageShipmentsIcon />,
     link: "/tablero/manageshipment",
   },
   {
     id: "driver",
-    label: "Gestion de viajes (Conductor)",
+    label: "Gestion de viajes ", //(Conductor)
     icon: <HistorialShipmentIcon />,
     link: "/tablero/managedriver",
   },

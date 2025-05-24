@@ -16,3 +16,7 @@ export { UserProfile }
 
 import FastTransportMain from './FastTransportMain.png';
 export { FastTransportMain }
+
+import CheckCircle from './Check circle outline.svg';
+
+export { CheckCircle }

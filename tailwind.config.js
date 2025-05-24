@@ -36,6 +36,9 @@ export default {
         tooltipError: {
           DEFAULT: "#dc143c",
         },
+        inTransit:{
+          DEFAULT:"#4B7BEB"
+        },
         tooltipProgres: {
           DEFAULT: "#9CA3AF",
         },
@@ -84,7 +87,10 @@ export default {
               DEFAULT: "#9CA3AF",
             }, placeHolder: {
               DEFAULT: "#cfc4bc",
-            }
+            },
+             inTransit:{
+          DEFAULT:"#4B7BEB"
+        },
           },
         },
       },

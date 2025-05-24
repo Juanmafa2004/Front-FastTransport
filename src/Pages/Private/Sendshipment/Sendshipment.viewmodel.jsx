@@ -1,16 +1,20 @@
-import { validarEmail, validarSoloLetrasYTildes } from "@Utils";
+import { esSoloNumeros, validarSoloLetrasYTildes } from "@Utils";
 import { useState, useEffect } from "react";
+import { today, getLocalTimeZone } from "@internationalized/date";
 import { useNotifyHandler } from "@Hooks";
+
 const SendshipmentViewModel = () => {
   const initialState = {
-    name: "",
-    email: "",
-    rol: "",
-    estado: true,
+    startDirection: "",
+    recolectDay: today(getLocalTimeZone()),
+    endDirection: "",
+    deliveryDay: null,
+    observations: "",
   };
   const [formData, setFormData] = useState(initialState);
   const { alertNotify } = useNotifyHandler();
   const [openModal, setOpenModal] = useState(false);
+
   const [canContinue, setCanContinue] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -55,8 +59,12 @@ const SendshipmentViewModel = () => {
     if (writing) {
       setFormData({
         ...formData,
-        [key]: typeof val === "object" ? [...val][0] : val,
+        [key]: val,
       });
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [key]: "",
+      }));
     }
   };
 
@@ -116,7 +124,6 @@ const SendshipmentViewModel = () => {
         email: formData.email,
       },
       rol: formData.rol,
-      company: companyUser?.id,
       status: formData.estado ? "ACTIVO" : "INACTIVO",
       date_accept_habeas_data: null,
       date_accept_tc: null,

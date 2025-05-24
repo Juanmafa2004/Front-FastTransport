@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -6,28 +7,47 @@ import {
   TableRow,
   TableCell,
 } from "@heroui/react";
-import { useEffect, useState } from "react";
-import { EditIcon } from "../../Components/EditIcon";
+import { InfoShipmentModal } from "./modals/infoShipmentModal";
+import { WatchIcon } from "../../Components/WatchIcon";
+import { formatISOToDate } from "@Utils";
 
-const tempData = [
-  {
-    id: 1,
-    fechaSolicitud: "05/05/2025",
-    estado: "Entregado",
-  },
-  {
-    id: 2,
-    fechaSolicitud: "02/05/2025",
-    estado: "En progreso",
-  },
-  {
-    id: 3,
-    fechaSolicitud: "30/04/2025",
-    estado: "Finalizado",
-  },
-];
+export const ContentTable = ({ data, toggleModal, modals }) => {
+  const [dataArray, setDataArray] = useState([]);
+  const [selectedRowData, setSelectedRowData] = useState(null);
 
-export const ContentTable = () => {
+  useEffect(() => {
+    if (data) {
+      const dataTransformed = Object.values(data);
+      setDataArray(dataTransformed);
+    } else {
+      setDataArray([]);
+    }
+  }, [data]);
+
+  const toggleModalWithRowData = (modalName, rowData = null) => {
+    toggleModal(modalName);
+    if (rowData) {
+      setSelectedRowData(rowData);
+    }
+  };
+
+  const returnStateColor = (id) => {
+    switch (id) {
+      case 1: //pendiente
+        return "bg-tooltipProgres";
+      case 2: //en Proceso
+        return "bg-tooltipProcess";
+      case 3: //en Transito
+        return "bg-inTransit";
+      case 4: //Entregado
+        return "bg-status";
+      case 5: //cancelado
+        return "bg-inactive";
+      default:
+        return "bg-gray-500";
+    }
+  };
+
   return (
     <>
       <Table
@@ -41,47 +61,47 @@ export const ContentTable = () => {
         }}
       >
         <TableHeader>
-          <TableColumn className="w-[150px]">Id</TableColumn>
           <TableColumn className="w-[156px]">Fecha de solicitud</TableColumn>
+          <TableColumn className="w-[150px]">
+            Fecha de entrega seleccionada
+          </TableColumn>
           <TableColumn className="w-[150px]">Estado</TableColumn>
           <TableColumn className="w-[50px]">Acciones</TableColumn>
         </TableHeader>
         <TableBody
-          items={tempData || []}
+          items={dataArray || []}
           emptyContent={"No hay datos para mostrar."}
         >
           {(item) => (
-            <TableRow key={`${item.id}-${Math.random()}`}>
-              <TableCell>{item?.id}</TableCell>
-              <TableCell>{item?.fechaSolicitud}</TableCell>
-
+            <TableRow key={`${item?.id_envio}-${item?.id_cliente}`}>
+              <TableCell>{formatISOToDate(item?.fecha_solicitud)}</TableCell>
+              <TableCell>{formatISOToDate(item?.fecha_entrega)}</TableCell>
               <TableCell>
                 <span
-                  className={`px-[18px] py-0.5 text-[8px] font-bold text-white rounded ${
-                    item.estado.toLowerCase() === "entregado"
-                      ? "bg-status"
-                      : item.estado.toLocaleLowerCase() === "en progreso"
-                      ? "bg-tooltipProcess"
-                      : "bg-inactive"
-                  }`}
+                  className={`px-[18px] py-0.5 text-[9px] font-bold text-white rounded ${returnStateColor(
+                    item?.id_estado_envio
+                  )}`}
                 >
-                  {item.estado}
+                  {item.nombre_estado}
                 </span>
               </TableCell>
               <TableCell>
-                <div className=" flex items-center justify-center w-full ">
-                  <span
-                    className=" cursor-pointer active:opacity-50"
-                    //  onClick={() => toggleModalWithRowData("modalEdit", item)}
-                  >
-                    <EditIcon />
-                  </span>
-                </div>
+                <span
+                  className=" cursor-pointer active:opacity-50 flex mx-2"
+                  onClick={() => toggleModalWithRowData("modalInfo", item)}
+                >
+                  <WatchIcon className="text-2xl text-default-400" />
+                </span>
               </TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
+      <InfoShipmentModal
+        isOpen={modals.modalInfo}
+        onClose={() => toggleModal("modalInfo")}
+        data={selectedRowData}
+      />
     </>
   );
 };

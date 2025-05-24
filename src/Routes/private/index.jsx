@@ -1,12 +1,13 @@
-import { Managedriver } from "@Pages";
+import { Routes, Route } from "react-router-dom";
+import { DashboardLayout } from "./DashboardLayout";
+import RoleRoute from "./RoleRoute";
 import {
   Homepage,
   Sendshipment,
   Historialshipment,
   Manageshipment,
+  Managedriver,
 } from "@Pages";
-import { Routes, Route } from "react-router-dom";
-import { DashboardLayout } from "./DashboardLayout";
 
 const Dashboard = () => {
   return (
@@ -14,10 +15,16 @@ const Dashboard = () => {
       <Route element={<DashboardLayout />}>
         <Route path="/" element={<Homepage />} />
         <Route path="/homepage" element={<Homepage />} />
-        <Route path="/sendshipment" element={<Sendshipment />} />
-        <Route path="/historialshipment" element={<Historialshipment />} />
-        <Route path="/manageshipment" element={<Manageshipment />} />
+        <Route element={<RoleRoute allowedRoles={[2, 4]} />}>
+          <Route path="/sendshipment" element={<Sendshipment />} />
+          <Route path="/historialshipment" element={<Historialshipment />} />
+        </Route>
+        <Route element={<RoleRoute allowedRoles={[1, 4]} />}>
+          <Route path="/manageshipment" element={<Manageshipment />} />
+        </Route>
+        <Route element={<RoleRoute allowedRoles={[3, 4]} />} />
         <Route path="/managedriver" element={<Managedriver />} />
+        <Route />
       </Route>
     </Routes>
   );
