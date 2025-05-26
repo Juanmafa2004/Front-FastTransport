@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ManageshipmentViewModel = () => {
+const DrivershipmentViewModel = () => {
   const [modals, setModals] = useState({
     modalInfo: false,
     modalEdit: false,
@@ -13,7 +13,12 @@ const ManageshipmentViewModel = () => {
     setModals((prev) => ({ ...prev, [modalName]: !prev[modalName] }));
   };
 
-  return { modals, toggleModal, data, setData };
+  return {
+    modals,
+    toggleModal,
+    data,
+    setData,
+  };
 };
 
-export default ManageshipmentViewModel;
+export default DrivershipmentViewModel;

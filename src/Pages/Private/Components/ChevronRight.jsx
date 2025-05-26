@@ -1,4 +1,4 @@
-export const HamburgerIcon = () => {
+export const ChevronRight = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,13 +6,14 @@ export const HamburgerIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="size-7 text-main"
-      aria-label="hamburger icon"
+      className="size-6"
+      aria-label="chevron right icon"
+      {...props}
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+        d="m8.25 4.5 7.5 7.5-7.5 7.5"
       />
     </svg>
   );

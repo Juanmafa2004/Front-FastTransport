@@ -1,3 +1,4 @@
+import { Drivershipment } from "@Pages";
 import { Routes, Route } from "react-router-dom";
 import { DashboardLayout } from "./DashboardLayout";
 import RoleRoute from "./RoleRoute";
@@ -25,6 +26,7 @@ const Dashboard = () => {
         <Route element={<RoleRoute allowedRoles={[3, 4]} />} />
         <Route path="/managedriver" element={<Managedriver />} />
         <Route />
+        <Route path="/drivershipment" element={<Drivershipment />} />
       </Route>
     </Routes>
   );

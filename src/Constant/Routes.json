@@ -3,17 +3,21 @@
     "users": {
       "login": "/usuarios/login"
     },
-    "clients":{
-      "getClients":"/clientes/"
+    "clients": {
+      "getClients": "/clientes/"
     },
-    "envio":{
-      "getEnvios":"/envio/"
+    "envio": {
+      "getEnvios": "/envio/"
     },
-    "estadoEnvio":{
-      "getEstadoEnvios":"/estado_envio/"
+    "estadoEnvio": {
+      "getEstadoEnvios": "/estado_envio/"
     },
-    "rutas":{
-      "getRutas":"/rutas/"
+    "rutas": {
+      "getRutas": "/rutas/",
+      "getRutasByConductor": "/rutas/conductor/"
+    },
+    "conductores": {
+      "getConductores": "/conductor/"
     }
   }
 }

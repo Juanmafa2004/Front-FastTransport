@@ -1,4 +1,4 @@
-export const HamburgerIcon = () => {
+export const ArrowLeft = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,13 +6,13 @@ export const HamburgerIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="size-7 text-main"
-      aria-label="hamburger icon"
+      {...props}
+      aria-label="left arrow  icon"
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+        d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
       />
     </svg>
   );

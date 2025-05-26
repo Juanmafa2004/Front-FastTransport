@@ -2,7 +2,6 @@ import CryptoJS from "crypto-js";
 import { Config } from "@Constant";
 import { CalendarDate } from "@internationalized/date";
 
-
 /**
  * Valida si una cadena de texto cumple con el formato de una dirección de correo electrónico.
  *
@@ -21,7 +20,7 @@ import { CalendarDate } from "@internationalized/date";
  */
 
 export function validarEmail(email) {
-  const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const regex = /^[a-zA-Z0-9._%+ñÑ-]+@[a-zA-Z0-9ñÑ.-]+\.[a-zA-Z]{2,}$/;
   return regex.test(email);
 }
 
@@ -407,8 +406,6 @@ export function esSoloNumeros(cadena) {
   const regex = /^\d*$/;
   return regex.test(cadena);
 }
-
-
 
 export const formatDate = (date) => {
   const d = new Date(date);

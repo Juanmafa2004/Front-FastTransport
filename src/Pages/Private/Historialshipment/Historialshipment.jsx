@@ -20,7 +20,7 @@ const Historialshipment = () => {
     setIsLoading(true);
     try {
       const response = await getEnvios({ id_usuario: selectedUser() });
-      console.log("Response:", response);
+      // console.log("Response:", response);
       if (response.status === 200) {
         setData(response.data);
         setIsLoading(false);

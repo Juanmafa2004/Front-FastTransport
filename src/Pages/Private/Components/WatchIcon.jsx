@@ -8,6 +8,7 @@ export const WatchIcon = (props) => {
       role="presentation"
       viewBox="0 0 24 24"
       width="1em"
+      aria-label="eye icon"
       {...props}
     >
       <path

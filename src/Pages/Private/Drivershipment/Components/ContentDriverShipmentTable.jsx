@@ -6,16 +6,16 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Tooltip,
 } from "@heroui/react";
-import { EditIcon } from "../../Components/EditIcon";
 import { formatISOToDate } from "@Utils";
 import { WatchIcon } from "../../Components/WatchIcon";
-import { InfoAdminShipmentModal } from "./modals/InfoAdminShipmentModal";
+import { InfoShipmentDriverModal } from "./modals/InfoShipmentDriverModal";
+import { CheckIcon } from "../../Components/CheckIcon";
 
-export const ContentAdminTable = ({ data, toggleModal, modals }) => {
+export const ContentDriverShipmentTable = ({ data, toggleModal, modals }) => {
   const [dataArray, setDataArray] = useState([]);
   const [selectedRowData, setSelectedRowData] = useState(null);
-
   useEffect(() => {
     if (data) {
       const dataTransformed = Object.values(data);
@@ -24,7 +24,6 @@ export const ContentAdminTable = ({ data, toggleModal, modals }) => {
       setDataArray([]);
     }
   }, [data]);
-
   const toggleModalWithRowData = (modalName, rowData = null) => {
     toggleModal(modalName);
     if (rowData) {
@@ -52,7 +51,7 @@ export const ContentAdminTable = ({ data, toggleModal, modals }) => {
   return (
     <>
       <Table
-        aria-label="Tabla de usuarios"
+        aria-label="Tabla de conductor de pedidos"
         removeWrapper
         classNames={{
           base: "max-w-full",
@@ -62,17 +61,9 @@ export const ContentAdminTable = ({ data, toggleModal, modals }) => {
         }}
       >
         <TableHeader>
-          <TableColumn className="w-[140px]">Fecha de solicitud</TableColumn>
-          <TableColumn className="w-[140px]">
-            Fecha de entrega seleccionada
-          </TableColumn>
-          <TableColumn className="w-[140px]">
-            Nombre del solicitante
-          </TableColumn>
-          <TableColumn className="w-[140px]">
-            Correo electrónico del solicitante
-          </TableColumn>
-          <TableColumn className="w-[110px]">Estado</TableColumn>
+          <TableColumn className="w-[100px]">Fecha de entrega</TableColumn>
+          <TableColumn className="w-[70px]">Nombre del solicitante</TableColumn>
+          <TableColumn className="w-[50px]">Estado</TableColumn>
           <TableColumn className="w-[50px]">Acciones</TableColumn>
         </TableHeader>
         <TableBody
@@ -81,10 +72,8 @@ export const ContentAdminTable = ({ data, toggleModal, modals }) => {
         >
           {(item) => (
             <TableRow key={`${item?.id_envio}-${item?.id_cliente}`}>
-              <TableCell>{formatISOToDate(item?.fecha_solicitud)}</TableCell>
               <TableCell>{formatISOToDate(item?.fecha_entrega)}</TableCell>
               <TableCell>{item.cliente_nombre}</TableCell>
-              <TableCell>{item.correo_cliente}</TableCell>
               <TableCell>
                 <span
                   className={`px-[18px] py-0.5 text-[9px] font-bold text-white rounded ${returnStateColor(
@@ -101,22 +90,34 @@ export const ContentAdminTable = ({ data, toggleModal, modals }) => {
                 >
                   <WatchIcon className="text-2xl text-default-400" />
                 </span>
-                <span
-                  className=" cursor-pointer active:opacity-50 flex mx-2"
-                  // onClick={() => toggleModalWithRowData("modalInfo", item)}
+                <Tooltip
+                  closeDelay={0}
+                  content="Entregar pedido"
+                  placement="top"
+                  offset={7}
+                  crossOffset={16}
+                  classNames={{
+                    base: ["before:bg-tooltip dark:before:bg-tooltip"],
+                    content: ["py-2 px-4", "text-white bg-tooltip"],
+                  }}
                 >
-                  <EditIcon className="text-2xl text-default-400" />
-                </span>
+                  <span
+                    className=" cursor-pointer active:opacity-50 flex mx-2 border border-default-300 rounded-full"
+                    // onClick={() => toggleModalWithRowData("modalInfo", item)}
+                  >
+                    <CheckIcon className="text-2xl text-default-400 " />
+                  </span>
+                </Tooltip>
               </TableCell>
             </TableRow>
           )}
         </TableBody>
       </Table>
-      <InfoAdminShipmentModal
-          isOpen={modals.modalInfo}
-          onClose={() => toggleModal("modalInfo")}
-          data={selectedRowData}
-        />
+      <InfoShipmentDriverModal
+        isOpen={modals.modalInfo}
+        onClose={() => toggleModal("modalInfo")}
+        data={selectedRowData}
+      />
     </>
   );
 };
