@@ -35,3 +35,40 @@ export const getRutasByConductorId = async (id) => {
     status: rutas.code,
   };
 };
+
+export const desactivateRoute = async (id) => {
+  const rutas = await RequestHttp(
+    {
+      id_estado: 2, // 1 Activo, 2 Inactivo
+    },
+    {
+      base: "rutas",
+      entry: "getRutas",
+      method: "PATCH",
+      id: id,
+    }
+  );
+  return {
+    data: { ...rutas.data },
+    msg: rutas.msg,
+    status: rutas.code,
+  };
+};
+export const ActivateRoute = async (id) => {
+  const rutas = await RequestHttp(
+    {
+      id_estado: 1, // 1 Activo, 2 Inactivo
+    },
+    {
+      base: "rutas",
+      entry: "getRutas",
+      method: "PATCH",
+      id: id,
+    }
+  );
+  return {
+    data: { ...rutas.data },
+    msg: rutas.msg,
+    status: rutas.code,
+  };
+};

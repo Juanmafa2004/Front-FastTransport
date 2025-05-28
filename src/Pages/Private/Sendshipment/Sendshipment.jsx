@@ -1,8 +1,9 @@
 import styles from "./Sendshipment.style.module.css";
 import { today, getLocalTimeZone } from "@internationalized/date";
 import SendshipmentViewModel from "./Sendshipment.viewmodel";
-import { Button, Input, Textarea, DatePicker } from "@heroui/react";
+import { Button, Input, Textarea, DatePicker, Tooltip } from "@heroui/react";
 import ModalMessage from "./Components/ModalMessage";
+import { ExclamationIcon } from "../Components/ExclamationIcon";
 const Sendshipment = () => {
   const {
     formData,
@@ -13,7 +14,6 @@ const Sendshipment = () => {
     handleBlur,
     openModal,
     onCloseModal,
-    sendForm,
     resetData,
   } = SendshipmentViewModel();
   return (
@@ -50,6 +50,7 @@ const Sendshipment = () => {
                   }
                   isInvalid={!!errors.startDirection}
                   errorMessage={errors.startDirection}
+                  onBlur={() => handleBlur("startDirection")}
                 />
                 <DatePicker
                   label="Fecha de recogida (*)"
@@ -87,6 +88,7 @@ const Sendshipment = () => {
                   }
                   isInvalid={!!errors.endDirection}
                   errorMessage={errors.endDirection}
+                  onBlur={() => handleBlur("endDirection")}
                 />
                 <DatePicker
                   label="Fecha de entrega (*)"
@@ -107,7 +109,26 @@ const Sendshipment = () => {
               </section>
               <section className="w-full mt-5 flex gap-4">
                 <Textarea
-                  label="Observaciones (*) "
+                  label={
+                    <span className="flex items-center gap-1">
+                      Observaciones (*)
+                      <Tooltip
+                        closeDelay={0}
+                        content="Debe colocar las observaciones del pedido, por ejemplo: si el pedido tiene alguna condición especial, etc."
+                        placement="top"
+                        offset={7}
+                        crossOffset={16}
+                        classNames={{
+                          base: ["before:bg-tooltip dark:before:bg-tooltip"],
+                          content: ["py-2 px-4", "text-white bg-tooltip"],
+                        }}
+                      >
+                        <span className="cursor-pointer ">
+                          <ExclamationIcon />{" "}
+                        </span>
+                      </Tooltip>
+                    </span>
+                  }
                   className="w-full"
                   value={formData.observations}
                   classNames={{
@@ -125,6 +146,7 @@ const Sendshipment = () => {
                   isInvalid={!!errors.observations}
                   errorMessage={errors.observations}
                   maxRows={3}
+                  onBlur={() => handleBlur("observations")}
                 />
               </section>
             </div>
@@ -132,7 +154,7 @@ const Sendshipment = () => {
 
           <div className="w-full py-11 flex justify-center gap-4">
             <Button
-              className={`${styles.button} rounded-md w-[150px] h-[35px] mt-8 px-8 py-4 text-base font-semibold transition-all duration-300  bg-[#cbcbc9] text-[rgba(17,18,21,50)]`}
+              className={` rounded-md w-[150px] h-[40px] mt-8 px-8 py-4 text-base font-semibold transition-all duration-300  bg-[#b6b6b5] text-[rgba(17,18,21,50)]`}
               onPress={resetData}
             >
               Cancelar
@@ -142,7 +164,7 @@ const Sendshipment = () => {
               type="submit"
               className={`${styles.button} ${
                 canContinue ? styles.enabled : styles.disabled
-              } w-[150px] h-[35px] mt-8 px-8 py-4 text-base font-semibold transition-all duration-300 rounded-md bg-[#e5e5e4] text-[rgba(17,18,21,50)]`}
+              } w-[155px] h-[40px] mt-8 px-8 py-4 text-base font-semibold transition-all duration-300 rounded-md bg-[#e5e5e4] text-[rgba(17,18,21,50)]`}
               isDisabled={!canContinue}
             >
               Crear

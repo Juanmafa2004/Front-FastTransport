@@ -10,6 +10,7 @@ export const Login = ({
   errors,
   handleValueChange,
   handleSubmit,
+  handleBlur,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
@@ -46,6 +47,7 @@ export const Login = ({
                 input: "placeholder:text-placeHolder",
               }}
               autoComplete="email"
+              onBlur={() => handleBlur("user")}
             />
           </div>
           <div

@@ -32,7 +32,7 @@ export const HomeViewmodel = () => {
 
     if (!user) {
       newErrors.user = "el correo es requerido";
-    } else if (!validarEmail(user)) {
+    } else if (!validarEmail(user.trim())) {
       newErrors.user = "el correo es inválido";
     }
 
@@ -68,6 +68,13 @@ export const HomeViewmodel = () => {
     }
   };
 
+  const handleBlur = (key) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [key]: prevFormData[key].trim(),
+    }));
+  };
+
   return {
     formData,
     setFormData,
@@ -75,6 +82,7 @@ export const HomeViewmodel = () => {
     setErrors,
     handleValueChange,
     handleSubmit,
+    handleBlur,
   };
 };
 

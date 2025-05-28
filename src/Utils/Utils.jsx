@@ -464,19 +464,4 @@ export function formatISOToDate(isoString) {
   return `${day}/${month}/${year}`;
 }
 
-export const organizePermissions = (permissions) => {
-  const organized = {};
 
-  permissions.forEach((permission) => {
-    const [category, action] = permission.split(".");
-    if (!organized[category]) {
-      organized[category] = [];
-    }
-    organized[category].push(category + "." + action);
-  });
-
-  return Object.keys(organized).map((category) => ({
-    name: category,
-    permissions: organized[category],
-  }));
-};

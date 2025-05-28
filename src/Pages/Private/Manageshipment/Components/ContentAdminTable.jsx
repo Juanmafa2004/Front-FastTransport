@@ -11,6 +11,7 @@ import { EditIcon } from "../../Components/EditIcon";
 import { formatISOToDate } from "@Utils";
 import { WatchIcon } from "../../Components/WatchIcon";
 import { InfoAdminShipmentModal } from "./modals/InfoAdminShipmentModal";
+import { EditAdminShipmentModal } from "./modals/EditAdminShipmentModal";
 
 export const ContentAdminTable = ({ data, toggleModal, modals }) => {
   const [dataArray, setDataArray] = useState([]);
@@ -103,7 +104,7 @@ export const ContentAdminTable = ({ data, toggleModal, modals }) => {
                 </span>
                 <span
                   className=" cursor-pointer active:opacity-50 flex mx-2"
-                  // onClick={() => toggleModalWithRowData("modalInfo", item)}
+                  onClick={() => toggleModalWithRowData("modalEdit", item)}
                 >
                   <EditIcon className="text-2xl text-default-400" />
                 </span>
@@ -113,10 +114,15 @@ export const ContentAdminTable = ({ data, toggleModal, modals }) => {
         </TableBody>
       </Table>
       <InfoAdminShipmentModal
-          isOpen={modals.modalInfo}
-          onClose={() => toggleModal("modalInfo")}
-          data={selectedRowData}
-        />
+        isOpen={modals.modalInfo}
+        onClose={() => toggleModal("modalInfo")}
+        data={selectedRowData}
+      />
+      <EditAdminShipmentModal
+        isOpen={modals.modalEdit}
+        onClose={() => toggleModal("modalEdit")}
+        data={selectedRowData}
+      />
     </>
   );
 };

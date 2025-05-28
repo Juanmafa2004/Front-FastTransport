@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import DrivershipmentViewModel from "./Drivershipment.viewmodel";
 import LoadingComp from "../Components/LoadingComp";
-
 import { getEnvios } from "@Adapters";
 import { ContentDriverShipmentTable } from "./Components/ContentDriverShipmentTable";
 import { decryptInformation } from "@Utils";
@@ -23,7 +22,6 @@ const Drivershipment = () => {
     setIsLoading(true);
     try {
       const response = await getEnvios({ id_ruta });
-      console.log("Response:", response.data);
       if (response.status === 200) {
         setData(response.data);
         setIsLoading(false);
@@ -65,6 +63,7 @@ const Drivershipment = () => {
           modals={modals}
           toggleModal={toggleModal}
           data={data}
+          reloadData={getData}
         />
       </div>
     </div>

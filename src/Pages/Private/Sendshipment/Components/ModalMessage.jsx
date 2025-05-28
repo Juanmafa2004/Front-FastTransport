@@ -30,7 +30,7 @@ const ModalMessage = ({ isOpen, onClose }) => {
                   a recoger el paquete.
                 </div>
                 <div className="w-[400px] h-[45px] absolute left-0 top-[60px] text-center text-black text-[12px] font-montserrat font-normal break-words">
-                  Recuerda que solo puedes llamar para solicitar un cambio en el
+                  Recuerda que solo puedes llamar para solicitar un cambio en la fecha de entrega del
                   pedido dentro de los proximos 30 minutos o hasta que el pedido
                   sea asigando a una ruta.
                 </div>

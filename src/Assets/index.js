@@ -20,3 +20,7 @@ export { FastTransportMain }
 import CheckCircle from './Check circle outline.svg';
 
 export { CheckCircle }
+
+import QuestionIcon from './QuestionIcon.svg';
+
+export { QuestionIcon }

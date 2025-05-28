@@ -4,7 +4,7 @@ const DrivershipmentViewModel = () => {
   const [modals, setModals] = useState({
     modalInfo: false,
     modalEdit: false,
-    ModolCreate: false,
+    modalState: false,
   });
 
   const [data, setData] = useState({});

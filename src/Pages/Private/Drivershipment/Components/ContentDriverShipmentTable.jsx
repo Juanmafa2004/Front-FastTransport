@@ -12,8 +12,14 @@ import { formatISOToDate } from "@Utils";
 import { WatchIcon } from "../../Components/WatchIcon";
 import { InfoShipmentDriverModal } from "./modals/InfoShipmentDriverModal";
 import { CheckIcon } from "../../Components/CheckIcon";
+import { FinishShipmentModal } from "./modals/FinishShipmentModal";
 
-export const ContentDriverShipmentTable = ({ data, toggleModal, modals }) => {
+export const ContentDriverShipmentTable = ({
+  data,
+  toggleModal,
+  modals,
+  reloadData,
+}) => {
   const [dataArray, setDataArray] = useState([]);
   const [selectedRowData, setSelectedRowData] = useState(null);
   useEffect(() => {
@@ -61,10 +67,10 @@ export const ContentDriverShipmentTable = ({ data, toggleModal, modals }) => {
         }}
       >
         <TableHeader>
-          <TableColumn className="w-[100px]">Fecha de entrega</TableColumn>
-          <TableColumn className="w-[70px]">Nombre del solicitante</TableColumn>
-          <TableColumn className="w-[50px]">Estado</TableColumn>
-          <TableColumn className="w-[50px]">Acciones</TableColumn>
+          <TableColumn className="w-[110px]">Fecha de entrega</TableColumn>
+          <TableColumn className="w-[150px]">Descripción</TableColumn>
+          <TableColumn className="w-[100px]">Estado</TableColumn>
+          <TableColumn className="w-[100px]">Acciones</TableColumn>
         </TableHeader>
         <TableBody
           items={dataArray || []}
@@ -73,7 +79,7 @@ export const ContentDriverShipmentTable = ({ data, toggleModal, modals }) => {
           {(item) => (
             <TableRow key={`${item?.id_envio}-${item?.id_cliente}`}>
               <TableCell>{formatISOToDate(item?.fecha_entrega)}</TableCell>
-              <TableCell>{item.cliente_nombre}</TableCell>
+              <TableCell>{item.descripcion}</TableCell>
               <TableCell>
                 <span
                   className={`px-[18px] py-0.5 text-[9px] font-bold text-white rounded ${returnStateColor(
@@ -90,24 +96,26 @@ export const ContentDriverShipmentTable = ({ data, toggleModal, modals }) => {
                 >
                   <WatchIcon className="text-2xl text-default-400" />
                 </span>
-                <Tooltip
-                  closeDelay={0}
-                  content="Entregar pedido"
-                  placement="top"
-                  offset={7}
-                  crossOffset={16}
-                  classNames={{
-                    base: ["before:bg-tooltip dark:before:bg-tooltip"],
-                    content: ["py-2 px-4", "text-white bg-tooltip"],
-                  }}
-                >
-                  <span
-                    className=" cursor-pointer active:opacity-50 flex mx-2 border border-default-300 rounded-full"
-                    // onClick={() => toggleModalWithRowData("modalInfo", item)}
+                {item.id_estado_envio !== 4 ? (
+                  <Tooltip
+                    closeDelay={0}
+                    content="Entregar pedido"
+                    placement="top"
+                    offset={7}
+                    crossOffset={16}
+                    classNames={{
+                      base: ["before:bg-tooltip dark:before:bg-tooltip"],
+                      content: ["py-2 px-4", "text-white bg-tooltip"],
+                    }}
                   >
-                    <CheckIcon className="text-2xl text-default-400 " />
-                  </span>
-                </Tooltip>
+                    <span
+                      className=" cursor-pointer active:opacity-50 flex mx-2 border border-default-300 rounded-full"
+                      onClick={() => toggleModalWithRowData("modalState", item)}
+                    >
+                      <CheckIcon className="text-2xl text-default-400 " />
+                    </span>
+                  </Tooltip>
+                ) : null}
               </TableCell>
             </TableRow>
           )}
@@ -116,6 +124,12 @@ export const ContentDriverShipmentTable = ({ data, toggleModal, modals }) => {
       <InfoShipmentDriverModal
         isOpen={modals.modalInfo}
         onClose={() => toggleModal("modalInfo")}
+        data={selectedRowData}
+      />
+      <FinishShipmentModal
+        isOpen={modals.modalState}
+        onClose={() => toggleModal("modalState")}
+        reloadData={reloadData}
         data={selectedRowData}
       />
     </>

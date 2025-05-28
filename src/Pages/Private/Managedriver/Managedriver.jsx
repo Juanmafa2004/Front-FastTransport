@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import ManagedriverViewModel from "./Managedriver.viewmodel";
 import { ContentDriverTable } from "./Components/ContentDriverTable";
@@ -53,7 +53,7 @@ const Managedriver = () => {
         Gestion de rutas
       </div>
       <div className="w-[90%] flex justify-center items-center gap-4 mx-4 ">
-        <ContentDriverTable data={data} />
+        <ContentDriverTable data={data} reloadData={getData} />
       </div>
     </div>
   );
