@@ -1,21 +1,48 @@
 import { useEffect, useState } from "react";
-import { getEnvios } from "@Adapters";
+import {
+  getActiveRutas,
+  getEnvios,
+  getEstadosEnvio,
+  getRutas,
+} from "@Adapters";
 import ManageshipmentViewModel from "./Manageshipment.viewmodel";
 import { ContentAdminTable } from "./Components/ContentAdminTable";
 import LoadingComp from "../Components/LoadingComp";
 
 const Manageshipment = () => {
-  const { modals, toggleModal, data, setData } = ManageshipmentViewModel();
+  const {
+    modals,
+    toggleModal,
+    data,
+    setData,
+    routes,
+    setRoutes,
+    activeRoute,
+    setActiveRoute,
+    setStates,
+    states,
+  } = ManageshipmentViewModel();
   const [isLoading, setIsLoading] = useState(false);
 
   const getData = async () => {
     setIsLoading(true);
     try {
       const response = await getEnvios({});
-      console.log("Response:", response);
+      const rutas = await getRutas({});
+      const activeRutas = await getActiveRutas();
+      const states = await getEstadosEnvio({});
+
       if (response.status === 200) {
         setData(response.data);
-        setIsLoading(false);
+      }
+      if (rutas.status === 200) {
+        setRoutes(rutas.data);
+      }
+      if (activeRutas.status === 200) {
+        setActiveRoute(activeRutas.data);
+      }
+      if (states.status === 200) {
+        setStates(states.data);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -42,6 +69,10 @@ const Manageshipment = () => {
           modals={modals}
           toggleModal={toggleModal}
           data={data}
+          routes={routes}
+          activeRoute={activeRoute}
+          stateShipment={states}
+          reloadData={getData}
         />
       </div>
     </div>

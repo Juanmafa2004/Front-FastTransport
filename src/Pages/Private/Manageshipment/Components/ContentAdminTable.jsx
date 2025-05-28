@@ -13,7 +13,15 @@ import { WatchIcon } from "../../Components/WatchIcon";
 import { InfoAdminShipmentModal } from "./modals/InfoAdminShipmentModal";
 import { EditAdminShipmentModal } from "./modals/EditAdminShipmentModal";
 
-export const ContentAdminTable = ({ data, toggleModal, modals }) => {
+export const ContentAdminTable = ({
+  data,
+  toggleModal,
+  modals,
+  routes,
+  activeRoute,
+  stateShipment,
+  reloadData, 
+}) => {
   const [dataArray, setDataArray] = useState([]);
   const [selectedRowData, setSelectedRowData] = useState(null);
 
@@ -122,6 +130,10 @@ export const ContentAdminTable = ({ data, toggleModal, modals }) => {
         isOpen={modals.modalEdit}
         onClose={() => toggleModal("modalEdit")}
         data={selectedRowData}
+        routes={routes}
+        activeRoute={activeRoute}
+        stateShipment={stateShipment}
+        reloadData={reloadData}
       />
     </>
   );

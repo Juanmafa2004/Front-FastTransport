@@ -19,6 +19,23 @@ export const getRutas = async (filters) => {
   };
 };
 
+
+export const getActiveRutas = async () => {
+  const rutas = await RequestHttp(
+    {},
+    {
+      base: "rutas",
+      entry: "getActiveRutas",
+      method: "GET",
+    }
+  );
+  return {
+    data: { ...rutas.data },
+    msg: rutas.msg,
+    status: rutas.code,
+  };
+}
+
 export const getRutasByConductorId = async (id) => {
   const rutas = await RequestHttp(
     {},

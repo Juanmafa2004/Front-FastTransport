@@ -4,30 +4,15 @@ import { today, getLocalTimeZone } from "@internationalized/date";
 import { useNotifyHandler } from "@Hooks";
 
 export const EditAdminModalViewModel = () => {
-  const initialState = {
-    endDirection: "",
-    deliveryDay: null,
-    observations: "",
-    id_ruta: 0,
-    driver: "",
-  };
   const [canContinue, setCanContinue] = useState(false);
   const [errors, setErrors] = useState({});
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     setCanContinue(
       formData.endDirection && formData.deliveryDay && formData.observations
     );
   }, [formData]);
-
-  const toDateOnly = (calendarDate) => {
-    if (!calendarDate) return null;
-    const { year, month, day } = calendarDate;
-    const jsDate = new Date(year, month - 1, day);
-    jsDate.setHours(0, 0, 0, 0); // normaliza a medianoche
-    return jsDate;
-  };
 
   const handleValueChangeForm = (val, key) => {
     let writing = true;
@@ -54,21 +39,34 @@ export const EditAdminModalViewModel = () => {
     }
   };
 
+  const toDateOnly = (calendarDate) => {
+    if (!calendarDate) return null;
+    const { year, month, day } = calendarDate;
+    const jsDate = new Date(year, month - 1, day);
+    jsDate.setHours(0, 0, 0, 0); // normaliza a medianoche
+    return jsDate;
+  };
+
+ 
   const handleBlur = (key) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [key]: prevFormData[key].trim(),
+      [key]:
+        typeof prevFormData[key] === "string"
+          ? prevFormData[key].trim()
+          : prevFormData[key],
     }));
   };
+  // ..
 
   return {
     formData,
     setFormData,
-    initialState,
     errors,
     setErrors,
     handleValueChangeForm,
     canContinue,
     handleBlur,
+    toDateOnly
   };
 };

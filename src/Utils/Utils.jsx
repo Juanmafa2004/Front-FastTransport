@@ -433,13 +433,21 @@ export const transformDate = (dateString) => {
   const [year, month, day] = dateString.split("-");
   return `${day}/${month}/${year}`;
 };
+export function calendarDateToISO(calendarDate) {
+  if (!calendarDate) return "";
+  const year = calendarDate.year.toString().padStart(4, "0");
+  const month = calendarDate.month.toString().padStart(2, "0");
+  const day = calendarDate.day.toString().padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
 
 export const parseISOToCalendarDate = (isoString) => {
+  if (!isoString) return null;
   const date = new Date(isoString);
   return new CalendarDate(
-    date.getFullYear(),
-    date.getMonth() + 1,
-    date.getDate()
+    date.getUTCFullYear(),
+    date.getUTCMonth() + 1,
+    date.getUTCDate()
   );
 };
 
@@ -463,5 +471,3 @@ export function formatISOToDate(isoString) {
   const year = date.getUTCFullYear();
   return `${day}/${month}/${year}`;
 }
-
-

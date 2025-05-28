@@ -38,7 +38,19 @@ export const updateShipmentState = async (id) => {
   };
 };
 
-
+export const patchShipment = async (data, id) => {
+  const envios = await RequestHttp(data, {
+    base: "envio",
+    entry: "getEnvios",
+    method: "PATCH",
+    id: id,
+  });
+  return {
+    data: { ...envios.data },
+    msg: envios.msg,
+    status: envios.code,
+  };
+};
 
 export const sendshipmentClient = async (data) => {
   const envios = await RequestHttp(

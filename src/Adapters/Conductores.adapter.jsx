@@ -18,3 +18,20 @@ export const getConductores = async (filters) => {
     status: conductores.code,
   };
 };
+
+export const getConductoresByRuta = async (id_ruta) => {
+  const conductores = await RequestHttp(
+    {},
+    {
+      base: "conductores",
+      entry: "getConductoresByRuta",
+      method: "GET",
+      id: id_ruta,
+    }
+  );
+  return {
+    data: { ...conductores.data },
+    msg: conductores.msg,
+    status: conductores.code,
+  };
+};

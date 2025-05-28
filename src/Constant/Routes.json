@@ -14,10 +14,12 @@
     },
     "rutas": {
       "getRutas": "/rutas/",
-      "getRutasByConductor": "/rutas/conductor/"
+      "getRutasByConductor": "/rutas/conductor/",
+      "getActiveRutas": "/rutas/activas"
     },
     "conductores": {
-      "getConductores": "/conductor/"
+      "getConductores": "/conductor/",
+      "getConductoresByRuta": "/conductor/ruta/"
     }
   }
 }
